@@ -24,13 +24,15 @@ def handleBtnPress(btn):
     if pinNum == 6:
         mpcText = linuxCmd('mpc')
         if mpcText.splitlines()[0][0:12] == 'NPO Radio2: ':
-            os.system('amixer set Headphone toggle > /dev/null')
+            os.system('volumio volume toggle > /dev/null')
         else:
-            os.system('mpc toggle > /dev/null')
+            os.system('volumio toggle > /dev/null')
     if pinNum == 13:
-        os.system('amixer set Headphone 500+ > /dev/null')
+        os.system('volumio volume unmute > /dev/null')
+        os.system('volumio volume plus > /dev/null')
     if pinNum ==19:
-        os.system('amixer set Headphone 500- > /dev/null')
+        os.system('volumio volume unmute > /dev/null')
+        os.system('volumio volume minus > /dev/null')
     
 
 
