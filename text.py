@@ -35,8 +35,9 @@ try:
     data = json.loads(vStatus.replace('\n','').replace('\'',''))
     trackText = data['artist']+ ' - ' + data['title'] + '\nAlbum: '+data['album'] + '\nVolume: ' + str(data['volume']) 
 except:
-    tracText = ''
-    
+    trackText = ''
+
+text = ''
 text += datetime.now().strftime('%H:%M - %d-%m-%y')
 
 
