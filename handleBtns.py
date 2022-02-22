@@ -8,6 +8,10 @@ btn3 = Button(13)                             # associated with the button
 btn4 = Button(19)          
 
 
+def linuxCmd(cmd):
+    import subprocess
+    result = subprocess.run(cmd, stdout=subprocess.PIPE)
+    return result.stdout.decode('utf-8')
 
 
 
@@ -18,7 +22,11 @@ def handleBtnPress(btn):
     if pinNum == 5:
         os.system('mpc next > /dev/null')
     if pinNum == 6:
-        os.system('amixer set Headphone toggle > /dev/null')
+        mpcText = linuxCmd('mpc')
+        if mpcText.splitlines()[0][0:12] == 'NPO Radio2: ':
+            os.system('amixer set Headphone toggle > /dev/null')
+        else:
+            os.system('mpc toggle > /dev/null')
     if pinNum == 13:
         os.system('amixer set Headphone 500+ > /dev/null')
     if pinNum ==19:

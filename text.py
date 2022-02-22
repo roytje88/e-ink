@@ -9,12 +9,49 @@ def linuxCmd(cmd):
 
 mpcText = linuxCmd('mpc')
 
-if mpcText.splitlines()[0][0:12] == 'NPO Radio2: ':
-    trackText = textwrap.fill(mpcText.splitlines()[0][12:],28)
-else:
-    trackText = textwrap.fill(mpcText.splitlines()[0],28)
-text = 'KNOPPEN\n1. Next track    2.Mute\n3. Volume up    4. Volume down'    
+try:
+    if mpcText.splitlines()[0][0:12] == 'NPO Radio2: ':
+        radioAan = True
+        trackText = textwrap.fill(mpcText.splitlines()[0][12:],31)
+    else:
+        radioAan = False
+        trackText = textwrap.fill(mpcText.splitlines()[0],31)
+except:
+    trackText = ''
+    radioAan = False
+text = ''
+iptxt = linuxCmd('ifconfig')
+x=0
+for i in iptxt.splitlines():
+    if i[:5]=='wlan0':
+        text += iptxt.splitlines()[x+1].split()[1]
+        break
+    x += 1
+ssid = open('./wlan.txt','r').read()
+text+= '           ' + ssid.splitlines()[0].split()[1]
+
+    
 text += '\n\n' + datetime.now().strftime('%H:%M - %d-%m-%y')
+if radioAan == False:
+    try:
+        percentage = int(mpcText.splitlines()[1][-5:-2])
+    except:
+        try:
+            percentage = int(mpcText.splitlines()[1][-4:-2])
+        except:
+            try:
+                percentage = int(mpcText.splitlines()[1][-3:-2])
+            except:
+                percentage = 0
+    else:
+        percentage = 0
+    text += '\n['
+    for i in range(1,27):
+        if i < 27 * (percentage/100):
+            text += '#'
+        else:
+            text += '-'
+    text += ']'
 text += '\n' + trackText    
 textFile = open('text.txt','w')
 n = textFile.write(text)
