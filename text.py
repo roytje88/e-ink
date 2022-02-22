@@ -9,17 +9,17 @@ def linuxCmd(cmd):
 
 mpcText = linuxCmd('mpc')
 
-try:
-    if mpcText.splitlines()[0][0:12] == 'NPO Radio2: ':
-        radioAan = True
-        trackText = textwrap.fill(mpcText.splitlines()[0][12:],27)
-    else:
-        radioAan = False
-        trackText = textwrap.fill(mpcText.splitlines()[0],27)
-except:
-    trackText = ''
-    radioAan = False
-text = ''
+# try:
+#     if mpcText.splitlines()[0][0:12] == 'NPO Radio2: ':
+#         radioAan = True
+#         trackText = textwrap.fill(mpcText.splitlines()[0][12:],27)
+#     else:
+#         radioAan = False
+#         trackText = textwrap.fill(mpcText.splitlines()[0],27)
+# except:
+#     trackText = ''
+#     radioAan = False
+# text = ''
 # iptxt = linuxCmd('ifconfig')
 # x=0
 # for i in iptxt.splitlines():
@@ -29,7 +29,13 @@ text = ''
 #     x += 1
 # ssid = open('./wlan.txt','r').read()
 # text+= '           ' + ssid.splitlines()[0].split()[1]
-
+try:
+    vStatus = linuxCmd(['volumio' ,'status'])
+    import json
+    data = json.loads(vStatus.replace('\n','').replace('\'',''))
+    trackText = data['artist']+ ' - ' + data['title'] + '\nAlbum: '+data['album'] + '\nVolume: ' + str(data['volume']) 
+except:
+    tracText = ''
     
 text += datetime.now().strftime('%H:%M - %d-%m-%y')
 
