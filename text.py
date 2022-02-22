@@ -33,6 +33,11 @@ try:
     vStatus = linuxCmd(['volumio' ,'status'])
     import json
     data = json.loads(vStatus.replace('\n','').replace('\'',''))
+    trackText = textwrap.fill(data['artist'] + ' - ' + data['title'],27)
+    trackText += '\nAlbum: ' + textWrap.fill(data['album'],27)
+    trackText += '\nVolume: ' + textWrap.fill(str(data['volume'],27))
+    trackText += '\nStatus: ' + textWrap.fill(str(data['status'],27))
+    
     trackText = data['artist']+ ' - ' + data['title'] + '\nAlbum: '+data['album'] + '\nVolume: ' + str(data['volume']) 
 except:
     trackText = ''
