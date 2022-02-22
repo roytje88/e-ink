@@ -12,10 +12,10 @@ mpcText = linuxCmd('mpc')
 try:
     if mpcText.splitlines()[0][0:12] == 'NPO Radio2: ':
         radioAan = True
-        trackText = textwrap.fill(mpcText.splitlines()[0][12:],31)
+        trackText = textwrap.fill(mpcText.splitlines()[0][12:],27)
     else:
         radioAan = False
-        trackText = textwrap.fill(mpcText.splitlines()[0],31)
+        trackText = textwrap.fill(mpcText.splitlines()[0],27)
 except:
     trackText = ''
     radioAan = False
@@ -31,27 +31,30 @@ text = ''
 # text+= '           ' + ssid.splitlines()[0].split()[1]
 
     
-text += '\n\n' + datetime.now().strftime('%H:%M - %d-%m-%y')
-if radioAan == False:
-    try:
-        percentage = int(mpcText.splitlines()[1][-5:-2])
-    except:
-        try:
-            percentage = int(mpcText.splitlines()[1][-4:-2])
-        except:
-            try:
-                percentage = int(mpcText.splitlines()[1][-3:-2])
-            except:
-                percentage = 0
-    else:
-        percentage = 0
-    text += '\n['
-    for i in range(1,27):
-        if i < 27 * (percentage/100):
-            text += '#'
-        else:
-            text += '-'
-    text += ']'
+text += datetime.now().strftime('%H:%M - %d-%m-%y')
+
+
+
+# if radioAan == False:
+#     try:
+#         percentage = int(mpcText.splitlines()[1][-5:-2])
+#     except:
+#         try:
+#             percentage = int(mpcText.splitlines()[1][-4:-2])
+#         except:
+#             try:
+#                 percentage = int(mpcText.splitlines()[1][-3:-2])
+#             except:
+#                 percentage = 0
+#     else:
+#         percentage = 0
+#     text += '\n['
+#     for i in range(1,25):
+#         if i < 25 * (percentage/100):
+#             text += '#'
+#         else:
+#             text += '-'
+#     text += ']'
 text += '\n' + trackText    
 textFile = open('text.txt','w')
 n = textFile.write(text)
