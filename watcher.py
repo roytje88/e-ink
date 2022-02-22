@@ -14,7 +14,7 @@ def PrintToDisplay(string):
     HBlackImage = Image.new('1', (epd2in7.EPD_HEIGHT,epd2in7.EPD_WIDTH), 255)
     draw = ImageDraw.Draw(HBlackImage)
     font = ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeMono.ttf', 17)
-    font = ImageFont.truetype('/usr/share/fonts/opentype/3270/3270Medium.otf', 17)
+    #font = ImageFont.truetype('/usr/share/fonts/opentype/3270/3270Medium.otf', 17)
     draw.text((5, 5), string, font = font, fill = 0)
     epd.display(epd.getbuffer(HBlackImage))
 

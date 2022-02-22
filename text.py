@@ -20,15 +20,15 @@ except:
     trackText = ''
     radioAan = False
 text = ''
-iptxt = linuxCmd('ifconfig')
-x=0
-for i in iptxt.splitlines():
-    if i[:5]=='wlan0':
-        text += iptxt.splitlines()[x+1].split()[1]
-        break
-    x += 1
-ssid = open('./wlan.txt','r').read()
-text+= '           ' + ssid.splitlines()[0].split()[1]
+# iptxt = linuxCmd('ifconfig')
+# x=0
+# for i in iptxt.splitlines():
+#     if i[:5]=='wlan0':
+#         text += iptxt.splitlines()[x+1].split()[1]
+#         break
+#     x += 1
+# ssid = open('./wlan.txt','r').read()
+# text+= '           ' + ssid.splitlines()[0].split()[1]
 
     
 text += '\n\n' + datetime.now().strftime('%H:%M - %d-%m-%y')
