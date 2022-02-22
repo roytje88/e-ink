@@ -21,7 +21,10 @@ def PrintToDisplay(string):
 class Handler(FileSystemEventHandler):
     def on_modified(self, event):
         if event.src_path == "./text.txt": # in this example, we only care about this one file
-            PrintToDisplay(open('./text.txt','r').read())
+            #PrintToDisplay(open('./text.txt','r').read())
+            print('text.txt is veranderd')
+        if event.src_path == './mpdStatus.txt':
+            print('mpdStatus.txt is veranderd')
 
 observer = Observer()
 observer.schedule(Handler(), ".") # watch the local directory
