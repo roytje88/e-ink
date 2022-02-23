@@ -28,10 +28,10 @@ def handleBtnPress(btn):
         else:
             os.system('volumio toggle > /dev/null')
     if pinNum == 13:
-        os.system('volumio volume unmute > /dev/null')
+        #os.system('volumio volume unmute > /dev/null')
         os.system('volumio volume plus > /dev/null')
     if pinNum ==19:
-        os.system('volumio volume unmute > /dev/null')
+        #os.system('volumio volume unmute > /dev/null')
         os.system('volumio volume minus > /dev/null')
     
 

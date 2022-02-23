@@ -33,10 +33,22 @@ try:
     vStatus = linuxCmd(['volumio' ,'status'])
     import json
     data = json.loads(vStatus.replace('\n','').replace('\'',''))
-    trackText = textwrap.fill(data['artist'] + ' - ' + data['title'],27)
-    trackText += '\nAlbum: ' + textwrap.fill(data['album'],27)
-    trackText += '\nVolume: ' + textwrap.fill(str(data['volume']),27)
-    trackText += '\nStatus: ' + textwrap.fill(data['status'],27)
+    try:
+        trackText = textwrap.fill(data['artist'] + ' - ' + data['title'],27)
+    except:
+        trackText = ''
+    try:
+        trackText += '\nAlbum: ' + textwrap.fill(data['album'],27)
+    except:
+        pass
+    try:
+        trackText += '\nVolume: ' + textwrap.fill(str(data['volume']),27)
+    except:
+        pass
+    try:
+        trackText += '\nStatus: ' + textwrap.fill(data['status'],27)
+    except:
+        pass
     
     #trackText = data['artist']+ ' - ' + data['title'] + '\nAlbum: '+data['album'] + '\nVolume: ' + str(data['volume']) 
 except:
